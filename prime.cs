@@ -1,26 +1,30 @@
+using System;
+class parameters
+{
+    public static void Main(){
+        
+    
+int num1;
 
-    public class prime
+Console.WriteLine("Accept number:");
+num1 = Convert.ToInt32(Console.ReadLine());
+if (num1 == 0 || num1 == 1)
+{
+    Console.WriteLine(num1 + " is not prime number");
+    Console.ReadLine();
+}
+else
+{
+    for (int a = 2; a <= num1 / 2; a++)
     {
-        static void Main(string[] args)
+        if (num1 % a == 0)
         {
-            Console.Write("Enter a Number : ");
-            int number = int.Parse(Console.ReadLine());
-            bool IsPrime = true;
-            for (int i = 2; i < number/2; i++)
-            {
-                if (number % i == 0)
-                {
-                    IsPrime = false;
-                    break;
-                }
-            }
-            if (IsPrime)
-            {
-                Console.Write("Number is Prime.");
-            }
-            else
-            {
-                Console.Write("Number is not Prime.");
-            }
+            Console.WriteLine(num1 + " is not prime number");
+            return;
         }
+
     }
+    Console.WriteLine(num1 + " is a prime number");
+    Console.ReadLine();
+}
+}
