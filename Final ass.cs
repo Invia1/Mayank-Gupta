@@ -20,7 +20,7 @@ namespace HospitalRegistration
     class Program
     {
         static List<Patient> patients = new List<Patient>();
-        private static object patient;
+        static object patient;
 
         static void Main()
         {
@@ -89,15 +89,14 @@ namespace HospitalRegistration
         {   
              Patient newPatient = new Patient();
              
-            Console.WriteLine("Enter Registration ID No:");
+            Console.WriteLine("Enter Aadhar No:");
             int n = int.Parse(Console.ReadLine());
             
             foreach (var patient in patients)
             {    
-                 if (patient.RegistrationID == n)
+                if (patient.AadharNo == n)
                 {
-                
-                
+                             
                 Console.WriteLine("Registration ID: " + patient.RegistrationID);
                 Console.WriteLine("First Name: " + patient.FirstName);
                 Console.WriteLine("Last Name: " + patient.LastName);
@@ -109,7 +108,8 @@ namespace HospitalRegistration
                 Console.WriteLine("Speciality: " + patient.Speciality);
                 Console.WriteLine("------------------------");
                 }
-                           }
+               
+            }
         }
 
         static void RegisterNewPatient()
