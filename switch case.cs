@@ -1,86 +1,139 @@
-
-
 using System;
-  
-public class GFG 
-{
-  
-    public static void Main(String[] args)
-    { 
-     int nitem;
-        
-        do
-        {Console.WriteLine("Type 1 for Factorial");
-        Console.WriteLine("Type 2 for Fabonicci series");
-        Console.WriteLine("Type 3 for Prime Number");
-        Console.WriteLine("Type 4 for Exit");
-         nitem = int.Parse(Console.ReadLine());
-        switch (nitem) 
-        {
 
-  
-        case 1:
-              int i,fact=1,number;      
-       Console.Write("Enter any Number: ");      
-       number= int.Parse(Console.ReadLine());     
-       for(i=1;i<=number;i++){      
-        fact=fact*i;      
-       }      
-       Console.Write("Factorial of " +number+" is: "+fact);    
-           
-            break;
-  
-        case 2:
-           int firstNumber = 0, SecondNumber = 1, nextNumber, numberOfElements;
-            Console.Write("Enter the number of elements to Print : ");
-            numberOfElements = int.Parse(Console.ReadLine());
-            if(numberOfElements < 2)
+class Program
+{
+    static int[] numbers = new int[100];
+    static int size = 0;
+
+    static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("1. Add number");
+            Console.WriteLine("2. Remove number");
+            Console.WriteLine("3. Sort numbers");
+            Console.WriteLine("4. Insert number");
+            Console.WriteLine("5. Exit");
+            Console.Write("Enter your choice (1-5): ");
+
+            int choice;
+            if (!int.TryParse(Console.ReadLine(), out choice))
             {
-                Console.Write("Please Enter a number greater than two");
+                Console.WriteLine("Invalid choice! Please try again.");
+                continue;
             }
-            else
+
+            switch (choice)
             {
-                
-                Console.Write(firstNumber + " " + SecondNumber + " ");
-                
-                for(int j = 2; j < numberOfElements; j++)
-                {
-                    nextNumber = firstNumber + SecondNumber;
-                    Console.Write(nextNumber + " ");
-                    firstNumber = SecondNumber;
-                    SecondNumber = nextNumber;
-                }
-            }
-            break;
-  
-        case 3:
-          Console.Write("Enter a Number : ");
-            int num = int.Parse(Console.ReadLine());
-            bool IsPrime = true;
-            for (int k = 2; k < num/2; k++)
-            {
-                if (num % k == 0)
-                {
-                    IsPrime = false;
+                case 1:
+                    AddNumber();
                     break;
-                }
+                case 2:
+                    RemoveNumber();
+                    break;
+                case 3:
+                    SortNumbers();
+                    break;
+                case 4:
+                    InsertNumber();
+                    break;
+                case 5:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice! Please try again.");
+                    break;
             }
-            if (IsPrime)
-            {
-                Console.Write("Number is Prime.");
-            }
-            else
-            {
-                Console.Write("Number is not Prime.");
-            }
-             
-           
-            break;
-             case 4:
-             return;
-           
         }
+    }
+
+    static void AddNumber()
+    {
+        if (size >= numbers.Length)
+        {
+            Console.WriteLine("Array is full! Cannot add more numbers.");
+            return;
         }
-        while(nitem != 4);
+
+        Console.Write("Enter a number to add: ");
+        int number;
+        if (!int.TryParse(Console.ReadLine(), out number))
+        {
+            Console.WriteLine("Invalid number! Please try again.");
+            return;
+        }
+
+        numbers[size] = number;
+        size++;
+        Console.WriteLine("Number added successfully!");
+    }
+
+    static void RemoveNumber()
+    {
+        if (size == 0)
+        {
+            Console.WriteLine("Array is empty! Cannot remove numbers.");
+            return;
+        }
+
+        Console.Write("Enter the index of the number to remove: ");
+        int index;
+        if (!int.TryParse(Console.ReadLine(), out index) || index < 0 || index >= size)
+        {
+            Console.WriteLine("Invalid index! Please try again.");
+            return;
+        }
+
+        for (int i = index; i < size - 1; i++)
+        {
+            numbers[i] = numbers[i + 1];
+        }
+        size--;
+        Console.WriteLine("Number removed successfully!");
+    }
+
+    static void SortNumbers()
+    {
+        if (size == 0)
+        {
+            Console.WriteLine("Array is empty! Cannot sort numbers.");
+            return;
+        }
+
+        Array.Sort(numbers, 0, size);
+        Console.WriteLine("Numbers sorted successfully!");
+    }
+
+    static void InsertNumber()
+    {
+        if (size >= numbers.Length)
+        {
+            Console.WriteLine("Array is full! Cannot insert more numbers.");
+            return;
+        }
+
+        Console.Write("Enter a number to insert: ");
+        int number;
+        if (!int.TryParse(Console.ReadLine(), out number))
+        {
+            Console.WriteLine("Invalid number! Please try again.");
+            return;
+        }
+
+        Console.Write("Enter the index to insert at: ");
+        int index;
+        if (!int.TryParse(Console.ReadLine(), out index) || index < 0 || index > size)
+        {
+            Console.WriteLine("Invalid index! Please try again.");
+            return;
+        }
+
+        for (int i = size; i > index; i--)
+        {
+            numbers[i] = numbers[i - 1];
+        }
+        numbers[index] = number;
+        size++;
+        Console.WriteLine("Number inserted successfully!");
     }
 }
